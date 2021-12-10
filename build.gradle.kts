@@ -3,8 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.6.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.6.0"
-	kotlin("plugin.spring") version "1.6.0"
+	id("org.jetbrains.kotlin.jvm") version "1.6.0"
+	id("org.jetbrains.kotlin.kapt") version "1.6.0"
+	id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
+	kotlin("plugin.serialization") version "1.5.31"
 }
 
 group = "swap.teste"
@@ -25,11 +27,16 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-devtools")
 	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android")
 	implementation ("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation ("com.google.code.gson:gson:2.8.8")
+	implementation ("com.google.code.gson:gson:2.8.9")
+	implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+	implementation ("com.google.code.gson:gson:2.8.9")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation(kotlin("test-junit"))
 
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("com.h2database:h2")
+
 
 
 

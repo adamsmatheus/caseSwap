@@ -10,7 +10,6 @@ import java.util.*
 
 
 @Repository
-
 interface CallerRepository : CrudRepository <Caller,UUID> {
 
 }

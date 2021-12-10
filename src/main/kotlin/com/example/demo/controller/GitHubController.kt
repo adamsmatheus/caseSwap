@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/github")
-class IssuesController {
+class GitHubController {
 
     @Autowired
     lateinit var registerRequestService: RegisterRequestService
 
-    @PostMapping
-    fun getIssues(@RequestBody callerDto: CallerDto): ResponseEntity<Any> {
+    @PostMapping("/newRequest")
+    fun newRequest(@RequestBody callerDto: CallerDto): ResponseEntity<Any> {
         var register = registerRequestService.registerIssueEvent(callerDto)
         if (register == null) {
             return ResponseEntity(
@@ -27,6 +27,20 @@ class IssuesController {
             )
         } else
             return ResponseEntity("Requisição executada com sucesso !", HttpStatus.OK)
-
     }
+
+    @PostMapping("/hook")
+    fun createWebhookRepository(@RequestBody callerDto: CallerDto): ResponseEntity<Any> {
+        var register = registerRequestService.registerIssueEvent(callerDto)
+        if (register == null) {
+            return ResponseEntity(
+                "Erro na tentativa da requisição, por favor tente novamente !",
+                HttpStatus.NOT_FOUND
+            )
+        } else
+            return ResponseEntity("Requisição executada com sucesso !", HttpStatus.OK)
+    }
+
+
+
 }
