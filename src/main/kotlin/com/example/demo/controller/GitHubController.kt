@@ -30,7 +30,7 @@ class GitHubController {
     }
 
     @PostMapping("/hook")
-    fun createWebhookRepository(@RequestBody callerDto: CallerDto): ResponseEntity<Any> {
+    fun createWebhookRepository(@RequestBody json: Json): ResponseEntity<Any> {
         var register = registerRequestService.registerIssueEvent(callerDto)
         if (register == null) {
             return ResponseEntity(

@@ -30,34 +30,22 @@ class GitHubService {
     }
 
     suspend fun connectGitHub(url: String) {
-        // val client = OkHttpClient()
-       /* val configRequest = ConfigRequest("http://example.com/webhook", "json", "1")
+
+        val configRequest = ConfigRequest("http://example.com/webhook", "json", "1")
         val requestDto = RequestDto(
             "web", configRequest
-        )*/
-        val jsonString = """{
-        "name":"web",
-        "config:{
-            "url":"http://example.com/webhook",
-            "content_type": "json",
-            "digest":"1"
-            }
-        }"""
-        //val values = requestDto.toString()
-
-       val objectMapper = ObjectMapper()
-        val requestBody: String = objectMapper
-            .writeValueAsString(jsonString)
+        )
+        val body = Gson().toJson(requestDto)
 
         val client = HttpClient.newBuilder().build();
         val request = HttpRequest.newBuilder().header("Accept", "application/vnd.github.v3+json")
-            .header("Authorization", "token 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")
+            .header("Authorization", "token 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")
             .uri(URI.create(url))
-            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+            .POST(HttpRequest.BodyPublishers.ofString(body))
             .build()
-
         val response = client.send(request, HttpResponse.BodyHandlers.ofString());
         println(response.body())
+
 
         //val body = Gson().toJson(requestDto)  // json string
 
